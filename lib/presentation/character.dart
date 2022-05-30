@@ -6,16 +6,34 @@ class Character extends StatelessWidget {
 
   final Result character;
 
+  List<Widget> getEpisodes() {
+    List<Widget> episodes = [];
+    for (String episode in character.episode) {
+      episodes.add(Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+        child: Chip(
+          label: Text(episode.split('/').last),
+        ),
+      ));
+    }
+    return episodes;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Text> information = [
+    final List<Widget> information = [
       Text('Gender : ${character.gender.toString().split('.').last}'),
       Text('Location : ${character.location.name}'),
-      Text('Origin ${character.origin.name}'),
+      Text('Origin : ${character.origin.name}'),
       Text('Species : ${character.species.toString().split('.').last}'),
       Text('Status : ${character.status.toString().split('.').last}'),
       Text('Type : ${character.type != '' ? character.type : 'none'}'),
-      Text('Episodes ${character.episode.first}'),
+      Wrap(
+        children: [
+          const Text('Episodes : '),
+          ...getEpisodes(),
+        ],
+      ),
     ];
 
     return Scaffold(

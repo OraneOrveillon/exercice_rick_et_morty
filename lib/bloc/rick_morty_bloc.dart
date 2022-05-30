@@ -15,7 +15,7 @@ class RickMortyBloc extends Bloc<RickMortyEvent, RickMortyState> {
     on<LoadRickMortyEvent>((event, emit) async {
       emit(RickMortyLoadingState());
       try {
-        final solarSystem = await _rickMortyRepository.getHttp();
+        final solarSystem = await _rickMortyRepository.getCharacters();
         emit(RickMortyLoadedState(solarSystem));
       } catch (e) {
         emit(RickMortyErrorState(e.toString()));
