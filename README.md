@@ -6,9 +6,9 @@ Learing how to use a RESR API.
 
 ## Screens :
 
-![image](Capture d’écran 2022-05-31 111902.png "List of characters")
-![image](Capture d’écran 2022-05-31 111924.png "Character")
-![image](Capture d’écran 2022-05-31 111941.png "Episode")
+![image](image1.png "List of characters")
+![image](image2.png "Character")
+![image](image3.png "Episode")
 
 ## Web ressources : 
 
