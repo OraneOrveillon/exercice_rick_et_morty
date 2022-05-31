@@ -3,6 +3,7 @@ import 'package:exercice_rick_et_morty/data/repository/characters_repository.dar
 import 'package:exercice_rick_et_morty/presentation/character.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 
 class CharactersPage extends StatelessWidget {
   const CharactersPage({Key? key}) : super(key: key);
@@ -27,15 +28,16 @@ class CharactersPage extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Rick & Morty : characters'),
-                leading: null,
+                leading: const Icon(Icons.info, color: Colors.indigo),
                 actions: [
                   IconButton(
                     onPressed: () {
                       if (state.rickMorty.info.prev != null) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => RepositoryProvider(
+                          PageTransition(
+                            type: PageTransitionType.leftToRight,
+                            child: RepositoryProvider(
                               create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.prev),
                               child: const CharactersPage(),
                             ),
@@ -50,8 +52,9 @@ class CharactersPage extends StatelessWidget {
                       if (state.rickMorty.info.next != null) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => RepositoryProvider(
+                          PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: RepositoryProvider(
                               create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.next),
                               child: const CharactersPage(),
                             ),
