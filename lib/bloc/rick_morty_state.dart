@@ -9,7 +9,7 @@ class RickMortyLoadingState extends RickMortyState {
 }
 
 class RickMortyLoadedState extends RickMortyState {
-  final RickMorty rickMorty;
+  final RickMortyCharacters rickMorty;
 
   RickMortyLoadedState(this.rickMorty);
 

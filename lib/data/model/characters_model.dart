@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-RickMorty bodyFromMap(String str) => RickMorty.fromMap(json.decode(str));
+RickMortyCharacters bodyFromMap(String str) => RickMortyCharacters.fromMap(json.decode(str));
 
-String bodyToMap(RickMorty data) => json.encode(data.toMap());
+String bodyToMap(RickMortyCharacters data) => json.encode(data.toMap());
 
-class RickMorty {
-  RickMorty({
+class RickMortyCharacters {
+  RickMortyCharacters({
     required this.info,
     required this.results,
   });
@@ -13,7 +13,7 @@ class RickMorty {
   final Info info;
   final List<Result> results;
 
-  factory RickMorty.fromMap(Map<String, dynamic> json) => RickMorty(
+  factory RickMortyCharacters.fromMap(Map<String, dynamic> json) => RickMortyCharacters(
         info: Info.fromMap(json["info"]),
         results: List<Result>.from(json["results"].map((x) => Result.fromMap(x))),
       );

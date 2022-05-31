@@ -1,5 +1,5 @@
 import 'package:exercice_rick_et_morty/bloc/rick_morty_bloc.dart';
-import 'package:exercice_rick_et_morty/data/repository/rick_morty_repository.dart';
+import 'package:exercice_rick_et_morty/data/repository/characters_repository.dart';
 import 'package:exercice_rick_et_morty/presentation/character.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +11,7 @@ class CharactersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RickMortyBloc(
-        RepositoryProvider.of<RickMortyRepository>(context),
+        RepositoryProvider.of<CharactersRepository>(context),
       )..add(LoadRickMortyEvent()),
       child: Scaffold(
         appBar: AppBar(
@@ -41,7 +41,7 @@ class CharactersPage extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Character(character: state.rickMorty.results[index]),
+                        builder: (context) => CharacterPage(character: state.rickMorty.results[index]),
                       ),
                     ),
                   );

@@ -1,26 +1,42 @@
-import 'package:exercice_rick_et_morty/data/model/rick_morty_model.dart';
+import 'package:exercice_rick_et_morty/data/model/characters_model.dart';
+import 'package:exercice_rick_et_morty/data/repository/characters_repository.dart';
+import 'package:exercice_rick_et_morty/presentation/episode.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Character extends StatelessWidget {
-  const Character({Key? key, required this.character}) : super(key: key);
+class CharacterPage extends StatelessWidget {
+  const CharacterPage({Key? key, required this.character}) : super(key: key);
 
   final Result character;
 
-  List<Widget> getEpisodes() {
-    List<Widget> episodes = [];
-    for (String episode in character.episode) {
-      episodes.add(Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
-        child: Chip(
-          label: Text(episode.split('/').last),
-        ),
-      ));
-    }
-    return episodes;
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> getEpisodes() {
+      List<Widget> episodes = [];
+      for (String episode in character.episode) {
+        episodes.add(
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RepositoryProvider(
+                    create: (context) => CharactersRepository(),
+                    child: EpisodePage(url: episode),
+                  ),
+                ),
+              ),
+              child: Chip(
+                label: Text(episode.split('/').last),
+              ),
+            ),
+          ),
+        );
+      }
+      return episodes;
+    }
+
     final List<Widget> information = [
       Text('Gender : ${character.gender.toString().split('.').last}'),
       Text('Location : ${character.location.name}'),

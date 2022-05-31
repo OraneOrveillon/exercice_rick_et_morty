@@ -1,5 +1,5 @@
-import 'package:exercice_rick_et_morty/data/repository/rick_morty_repository.dart';
-import 'package:exercice_rick_et_morty/characters.dart';
+import 'package:exercice_rick_et_morty/data/repository/characters_repository.dart';
+import 'package:exercice_rick_et_morty/presentation/characters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       home: RepositoryProvider(
-        create: (context) => RickMortyRepository(),
+        create: (context) => CharactersRepository(),
         child: const CharactersPage(),
       ),
     );
