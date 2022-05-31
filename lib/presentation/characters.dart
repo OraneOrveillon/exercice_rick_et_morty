@@ -32,13 +32,13 @@ class CharactersPage extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      if (state.rickMorty.info.prev != null) {
+                      if (state.characters.info.prev != null) {
                         Navigator.push(
                           context,
                           PageTransition(
                             type: PageTransitionType.leftToRight,
                             child: RepositoryProvider(
-                              create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.prev),
+                              create: (context) => CharactersRepository(pageUrl: state.characters.info.prev),
                               child: const CharactersPage(),
                             ),
                           ),
@@ -49,13 +49,13 @@ class CharactersPage extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      if (state.rickMorty.info.next != null) {
+                      if (state.characters.info.next != null) {
                         Navigator.push(
                           context,
                           PageTransition(
                             type: PageTransitionType.rightToLeft,
                             child: RepositoryProvider(
-                              create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.next),
+                              create: (context) => CharactersRepository(pageUrl: state.characters.info.next),
                               child: const CharactersPage(),
                             ),
                           ),
@@ -67,22 +67,22 @@ class CharactersPage extends StatelessWidget {
                 ],
               ),
               body: ListView.separated(
-                itemCount: state.rickMorty.results.length,
+                itemCount: state.characters.results.length,
                 padding: const EdgeInsets.all(10),
                 itemBuilder: (context, index) {
                   return ListTile(
                     contentPadding: const EdgeInsets.all(10),
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(state.rickMorty.results[index].image),
+                      backgroundImage: NetworkImage(state.characters.results[index].image),
                     ),
                     tileColor: Colors.indigo[100],
                     hoverColor: Colors.indigo[200],
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    title: Text(state.rickMorty.results[index].name),
+                    title: Text(state.characters.results[index].name),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CharacterPage(character: state.rickMorty.results[index]),
+                        builder: (context) => CharacterPage(character: state.characters.results[index]),
                       ),
                     ),
                   );

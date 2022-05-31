@@ -9,12 +9,12 @@ class CharactersLoadingState extends CharactersState {
 }
 
 class CharactersLoadedState extends CharactersState {
-  final RickMortyCharacters rickMorty;
+  final RickMortyCharacters characters;
 
-  CharactersLoadedState(this.rickMorty);
+  CharactersLoadedState(this.characters);
 
   @override
-  List<Object?> get props => [rickMorty];
+  List<Object?> get props => [characters];
 }
 
 class CharactersErrorState extends CharactersState {
