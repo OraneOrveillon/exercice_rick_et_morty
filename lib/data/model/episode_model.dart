@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Episode bodyFromMap(String str) => Episode.fromMap(json.decode(str));
+RickMortyEpisode bodyFromMap(String str) => RickMortyEpisode.fromMap(json.decode(str));
 
-String bodyToMap(Episode data) => json.encode(data.toMap());
+String bodyToMap(RickMortyEpisode data) => json.encode(data.toMap());
 
-class Episode {
-  Episode({
+class RickMortyEpisode {
+  RickMortyEpisode({
     required this.id,
     required this.name,
     required this.airDate,
@@ -23,7 +23,7 @@ class Episode {
   final String url;
   final DateTime created;
 
-  factory Episode.fromMap(Map<String, dynamic> json) => Episode(
+  factory RickMortyEpisode.fromMap(Map<String, dynamic> json) => RickMortyEpisode(
         id: json["id"],
         name: json["name"],
         airDate: json["air_date"],

@@ -1,4 +1,4 @@
-import 'package:exercice_rick_et_morty/bloc/rick_morty_bloc.dart';
+import 'package:exercice_rick_et_morty/bloc/characters/characters_bloc.dart';
 import 'package:exercice_rick_et_morty/data/repository/characters_repository.dart';
 import 'package:exercice_rick_et_morty/presentation/character.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +10,21 @@ class CharactersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RickMortyBloc(
+      create: (context) => CharactersBloc(
         RepositoryProvider.of<CharactersRepository>(context),
-      )..add(LoadRickMortyEvent()),
+      )..add(LoadCharactersEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Rick & Morty : characters'),
         ),
-        body: BlocBuilder<RickMortyBloc, RickMortyState>(
+        body: BlocBuilder<CharactersBloc, CharactersState>(
           builder: (context, state) {
-            if (state is RickMortyLoadingState) {
+            if (state is CharactersLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is RickMortyLoadedState) {
+            if (state is CharactersLoadedState) {
               return ListView.separated(
                 itemCount: state.rickMorty.results.length,
                 padding: const EdgeInsets.all(10),
@@ -51,7 +51,7 @@ class CharactersPage extends StatelessWidget {
                 },
               );
             }
-            if (state is RickMortyErrorState) {
+            if (state is CharactersErrorState) {
               return Center(
                 child: Text(state.error.toString()),
               );
