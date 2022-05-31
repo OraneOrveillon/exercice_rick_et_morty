@@ -13,19 +13,57 @@ class CharactersPage extends StatelessWidget {
       create: (context) => CharactersBloc(
         RepositoryProvider.of<CharactersRepository>(context),
       )..add(LoadCharactersEvent()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Rick & Morty : characters'),
-        ),
-        body: BlocBuilder<CharactersBloc, CharactersState>(
-          builder: (context, state) {
-            if (state is CharactersLoadingState) {
-              return const Center(
+      child: BlocBuilder<CharactersBloc, CharactersState>(
+        builder: (context, state) {
+          if (state is CharactersLoadingState) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: const Center(
                 child: CircularProgressIndicator(),
-              );
-            }
-            if (state is CharactersLoadedState) {
-              return ListView.separated(
+              ),
+            );
+          }
+          if (state is CharactersLoadedState) {
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Rick & Morty : characters'),
+                leading: null,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      if (state.rickMorty.info.prev != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RepositoryProvider(
+                              create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.prev),
+                              child: const CharactersPage(),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (state.rickMorty.info.next != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RepositoryProvider(
+                              create: (context) => CharactersRepository(pageUrl: state.rickMorty.info.next),
+                              child: const CharactersPage(),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios),
+                  )
+                ],
+              ),
+              body: ListView.separated(
                 itemCount: state.rickMorty.results.length,
                 padding: const EdgeInsets.all(10),
                 itemBuilder: (context, index) {
@@ -49,16 +87,16 @@ class CharactersPage extends StatelessWidget {
                 separatorBuilder: (BuildContext context, int index) {
                   return const SizedBox(height: 10);
                 },
-              );
-            }
-            if (state is CharactersErrorState) {
-              return Center(
-                child: Text(state.error.toString()),
-              );
-            }
-            return Container();
-          },
-        ),
+              ),
+            );
+          }
+          if (state is CharactersErrorState) {
+            return Center(
+              child: Text(state.error.toString()),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

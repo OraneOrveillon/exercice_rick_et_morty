@@ -34,8 +34,8 @@ class Info {
 
   final int count;
   final int pages;
-  final String next;
-  final dynamic prev;
+  final String? next;
+  final String? prev;
 
   factory Info.fromMap(Map<String, dynamic> json) => Info(
         count: json["count"],
