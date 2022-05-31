@@ -1,5 +1,5 @@
 import 'package:exercice_rick_et_morty/data/model/characters_model.dart';
-import 'package:exercice_rick_et_morty/data/repository/characters_repository.dart';
+import 'package:exercice_rick_et_morty/data/repository/episode_repository.dart';
 import 'package:exercice_rick_et_morty/presentation/episode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +22,8 @@ class CharacterPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => RepositoryProvider(
-                    create: (context) => CharactersRepository(),
-                    child: EpisodePage(url: episode),
+                    create: (context) => EpisodeRepository(url: episode),
+                    child: EpisodePage(),
                   ),
                 ),
               ),
