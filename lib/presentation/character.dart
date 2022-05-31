@@ -23,7 +23,7 @@ class CharacterPage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => RepositoryProvider(
                     create: (context) => EpisodeRepository(url: episode),
-                    child: EpisodePage(),
+                    child: const EpisodePage(),
                   ),
                 ),
               ),

@@ -17,12 +17,34 @@ class EpisodePage extends StatelessWidget {
         body: BlocBuilder<EpisodeBloc, EpisodeState>(
           builder: (context, state) {
             if (state is EpisodeLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Scaffold(
+                appBar: AppBar(),
+                body: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
             }
             if (state is EpisodeLoadedState) {
-              return Text(state.episode.name);
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(state.episode.episode),
+                ),
+                body: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Expanded(
+                    child: DefaultTextStyle(
+                      style: const TextStyle(fontSize: 20),
+                      child: ListView(
+                        children: [
+                          Text('Name : ${state.episode.name}'),
+                          const SizedBox(height: 10),
+                          Text('Date of release : ${state.episode.airDate}'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }
             if (state is EpisodeErrorState) {
               return Center(
